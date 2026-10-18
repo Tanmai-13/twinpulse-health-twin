@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RiskRouteImport } from './routes/risk'
+import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as TwinRouteImport } from './routes/twin'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RiskRoute = RiskRouteImport.update({
+  id: '/risk',
+  path: '/risk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimelineRoute = TimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TwinRoute = TwinRouteImport.update({
@@ -25,27 +37,35 @@ const TwinRoute = TwinRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/risk': typeof RiskRoute
+  '/timeline': typeof TimelineRoute
   '/twin': typeof TwinRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/risk': typeof RiskRoute
+  '/timeline': typeof TimelineRoute
   '/twin': typeof TwinRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/risk': typeof RiskRoute
+  '/timeline': typeof TimelineRoute
   '/twin': typeof TwinRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/twin'
+  fullPaths: '/' | '/risk' | '/timeline' | '/twin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/twin'
-  id: '__root__' | '/' | '/twin'
+  to: '/' | '/risk' | '/timeline' | '/twin'
+  id: '__root__' | '/' | '/risk' | '/timeline' | '/twin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RiskRoute: typeof RiskRoute
+  TimelineRoute: typeof TimelineRoute
   TwinRoute: typeof TwinRoute
 }
 
@@ -56,6 +76,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/risk': {
+      id: '/risk'
+      path: '/risk'
+      fullPath: '/risk'
+      preLoaderRoute: typeof RiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/timeline': {
+      id: '/timeline'
+      path: '/timeline'
+      fullPath: '/timeline'
+      preLoaderRoute: typeof TimelineRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/twin': {
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RiskRoute: RiskRoute,
+  TimelineRoute: TimelineRoute,
   TwinRoute: TwinRoute,
 }
 export const routeTree = rootRouteImport
