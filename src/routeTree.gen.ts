@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as DatasetRouteImport } from './routes/dataset'
+import { Route as QualityRouteImport } from './routes/quality'
 import { Route as RiskRouteImport } from './routes/risk'
+import { Route as SimulatorRouteImport } from './routes/simulator'
 import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as TwinRouteImport } from './routes/twin'
 
@@ -19,9 +23,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatasetRoute = DatasetRouteImport.update({
+  id: '/dataset',
+  path: '/dataset',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QualityRoute = QualityRouteImport.update({
+  id: '/quality',
+  path: '/quality',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RiskRoute = RiskRouteImport.update({
   id: '/risk',
   path: '/risk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimulatorRoute = SimulatorRouteImport.update({
+  id: '/simulator',
+  path: '/simulator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TimelineRoute = TimelineRouteImport.update({
@@ -37,34 +61,75 @@ const TwinRoute = TwinRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/dataset': typeof DatasetRoute
+  '/quality': typeof QualityRoute
   '/risk': typeof RiskRoute
+  '/simulator': typeof SimulatorRoute
   '/timeline': typeof TimelineRoute
   '/twin': typeof TwinRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/dataset': typeof DatasetRoute
+  '/quality': typeof QualityRoute
   '/risk': typeof RiskRoute
+  '/simulator': typeof SimulatorRoute
   '/timeline': typeof TimelineRoute
   '/twin': typeof TwinRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/dataset': typeof DatasetRoute
+  '/quality': typeof QualityRoute
   '/risk': typeof RiskRoute
+  '/simulator': typeof SimulatorRoute
   '/timeline': typeof TimelineRoute
   '/twin': typeof TwinRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/risk' | '/timeline' | '/twin'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/dataset'
+    | '/quality'
+    | '/risk'
+    | '/simulator'
+    | '/timeline'
+    | '/twin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/risk' | '/timeline' | '/twin'
-  id: '__root__' | '/' | '/risk' | '/timeline' | '/twin'
+  to:
+    | '/'
+    | '/about'
+    | '/dataset'
+    | '/quality'
+    | '/risk'
+    | '/simulator'
+    | '/timeline'
+    | '/twin'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/dataset'
+    | '/quality'
+    | '/risk'
+    | '/simulator'
+    | '/timeline'
+    | '/twin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  DatasetRoute: typeof DatasetRoute
+  QualityRoute: typeof QualityRoute
   RiskRoute: typeof RiskRoute
+  SimulatorRoute: typeof SimulatorRoute
   TimelineRoute: typeof TimelineRoute
   TwinRoute: typeof TwinRoute
 }
@@ -78,11 +143,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dataset': {
+      id: '/dataset'
+      path: '/dataset'
+      fullPath: '/dataset'
+      preLoaderRoute: typeof DatasetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quality': {
+      id: '/quality'
+      path: '/quality'
+      fullPath: '/quality'
+      preLoaderRoute: typeof QualityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/risk': {
       id: '/risk'
       path: '/risk'
       fullPath: '/risk'
       preLoaderRoute: typeof RiskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulator': {
+      id: '/simulator'
+      path: '/simulator'
+      fullPath: '/simulator'
+      preLoaderRoute: typeof SimulatorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/timeline': {
@@ -104,7 +197,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  DatasetRoute: DatasetRoute,
+  QualityRoute: QualityRoute,
   RiskRoute: RiskRoute,
+  SimulatorRoute: SimulatorRoute,
   TimelineRoute: TimelineRoute,
   TwinRoute: TwinRoute,
 }
