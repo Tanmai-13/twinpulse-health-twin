@@ -44,7 +44,7 @@ function SimulatorPage() {
   }));
 
   function save() {
-    if (!changed.length) return toast.error("Adjust at least one indicator before saving.");
+    if (!changed.length) { toast.error("Adjust at least one indicator before saving."); return; }
     addEvent({
       kind: "hypothetical",
       title: `Hypothetical simulation: score ${base.score ?? "n/a"} → ${next.score ?? "n/a"}`,
@@ -92,7 +92,7 @@ function SimulatorPage() {
                     </div>
                   ) : (
                     <div className="flex items-center gap-3">
-                      <Slider id={`s-${m}`} aria-label={METRICS[m].label} min={lo} max={hi} step={METRICS[m].step} value={[v]} onValueChange={([x]) => setSim((s) => ({ ...s, [m]: x }))} className="flex-1" />
+                      <Slider id={`s-${m}`} aria-label={METRICS[m].label} min={lo} max={hi} step={METRICS[m].step} value={[v]} onValueChange={([x]) => setSim((s) => ({ ...s, [m]: x ?? null }))} className="flex-1" />
                       {missingBase && <Button size="sm" variant="ghost" onClick={() => setSim((s) => ({ ...s, [m]: null }))}>Remove</Button>}
                     </div>
                   )}

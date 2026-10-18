@@ -10,7 +10,7 @@ export interface Observation {
   value: number | null;
   timestamp: string; // ISO UTC
   source: Source;
-  note?: string;
+  note?: string | undefined;
 }
 
 export interface TimelineEvent {

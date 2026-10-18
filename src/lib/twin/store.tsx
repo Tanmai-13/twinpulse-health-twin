@@ -60,7 +60,7 @@ function useTwinState() {
     if (hydrated) localStorage.setItem(KEY, JSON.stringify(state));
   }, [state, hydrated]);
 
-  const patient = PATIENTS.find((p) => p.id === state.activePatientId) ?? PATIENTS[0];
+  const patient = PATIENTS.find((p) => p.id === state.activePatientId) ?? PATIENTS[0]!;
   const allObs = useMemo(
     () => [...(state.observations[patient.id] ?? [])].sort((a, b) => a.timestamp.localeCompare(b.timestamp)),
     [state.observations, patient.id],
@@ -77,7 +77,7 @@ function useTwinState() {
     () => state.events.filter((e) => e.patientId === patient.id).sort((a, b) => b.timestamp.localeCompare(a.timestamp)),
     [state.events, patient.id],
   );
-  const lastUpdate = obs.length ? obs[obs.length - 1].timestamp : null;
+  const lastUpdate = obs.length ? obs[obs.length - 1]!.timestamp : null;
 
   const logEvent = (s: Persisted, e: Omit<TimelineEvent, "id" | "patientId" | "timestamp">): TimelineEvent[] => [
     ...s.events,

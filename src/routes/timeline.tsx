@@ -43,7 +43,8 @@ function TimelinePage() {
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Observation | null>(null);
   const [deleting, setDeleting] = useState<Observation | null>(null);
-  const sel = VIEWS.find((v) => v.key === view)!;
+  const sel = VIEWS.find((v) => v.key === view) ?? VIEWS[0]!;
+  const m0 = sel.metrics[0]!;
 
   const filtered = useMemo(() => {
     const from = range === "all" ? 0 : now - Number(range) * 86400000;
@@ -59,7 +60,7 @@ function TimelinePage() {
     .slice()
     .reverse();
   const missingCount = chartObs.filter((o) => o.value === null).length;
-  const staleFrom = now - thresholds[sel.metrics[0]] * 3600000;
+  const staleFrom = now - thresholds[m0] * 3600000;
 
   return (
     <div className="space-y-6">
@@ -132,7 +133,7 @@ function TimelinePage() {
         </Panel>
       </div>
 
-      <MeasurementDialog open={open} onOpenChange={setOpen} editing={editing} defaultMetric={sel.metrics[0]} />
+      <MeasurementDialog open={open} onOpenChange={setOpen} editing={editing} defaultMetric={m0} />
       <AlertDialog open={!!deleting} onOpenChange={(o) => !o && setDeleting(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>

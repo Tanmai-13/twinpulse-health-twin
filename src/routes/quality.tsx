@@ -59,7 +59,7 @@ function QualityPage() {
           </div>
           <div className="mt-4">
             <div className="mb-2 flex justify-between text-sm"><span className="font-medium">Delay all incoming readings</span><span className="text-muted-foreground">{sim.delayHours} h</span></div>
-            <Slider aria-label="Reading delay in hours" min={0} max={240} step={6} value={[sim.delayHours]} onValueChange={([v]) => setSim({ ...sim, delayHours: v })} />
+            <Slider aria-label="Reading delay in hours" min={0} max={240} step={6} value={[sim.delayHours]} onValueChange={([v]) => setSim({ ...sim, delayHours: v ?? 0 })} />
             <p className="mt-1.5 text-xs text-muted-foreground">Readings newer than the delay are treated as not yet received, so values age and may become outdated.</p>
           </div>
           {simActive && <div className="mt-4"><Notice>Simulation active — all pages currently reflect the reduced dataset.</Notice></div>}

@@ -36,7 +36,7 @@ export function TrendChart({ obs, metrics, height = 260, staleAfter }: { obs: Ob
           <Tooltip
             content={({ active, payload }) => {
               if (!active || !payload?.length) return null;
-              const r = payload[0].payload as Row;
+              const r = payload[0]!.payload as Row;
               return (
                 <div className="rounded-lg border bg-popover p-2.5 text-xs shadow-md">
                   <div className="mb-1 font-semibold">{fmtDateTime(r.t)}</div>

@@ -1,6 +1,6 @@
 import type { Metric, Observation, Patient } from "./types";
 
-export const PATIENTS: Patient[] = [
+export const PATIENTS: [Patient, ...Patient[]] = [
   { id: "DEMO-001", age: 46, label: "Synthetic profile A" },
   { id: "DEMO-002", age: 63, label: "Synthetic profile B" },
   { id: "DEMO-003", age: 29, label: "Synthetic profile C" },
@@ -60,7 +60,7 @@ const round = (v: number, d = 0) => Math.round(v * 10 ** d) / 10 ** d;
 
 /** Deterministic ~30-day synthetic dataset. Missing readings are explicit null markers. */
 export function generateDataset(patientId: string, anchor = anchorDate(), days = 30): Observation[] {
-  const p = PROFILES[patientId] ?? PROFILES["DEMO-001"];
+  const p = PROFILES[patientId] ?? PROFILES["DEMO-001"]!;
   const rand = mulberry32(p.seed);
   const out: Observation[] = [];
   for (let d = days - 1; d >= 0; d--) {
